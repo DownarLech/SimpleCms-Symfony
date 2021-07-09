@@ -64,6 +64,7 @@ class CategoryManagerTest extends KernelTestCase
         self::assertSame('camera', $dataFromDb->getName());
     }
 
+
     public function testSaveUpdate(): void
     {
         $categoryDataProvider = new CategoryDataProvider();

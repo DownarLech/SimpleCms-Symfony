@@ -8,7 +8,6 @@ use App\Component\Product\Business\ProductBusinessFacade;
 use App\Component\Product\Business\ProductBusinessFacadeInterface;
 use App\DataFixtures\CategoryFixture;
 use App\DataFixtures\ProductFixture;
-use App\DataTransferObject\CsvProductDataProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 

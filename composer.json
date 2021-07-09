@@ -12,7 +12,9 @@
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.9",
+        "league/csv": "^9.0",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "phpunit/php-code-coverage": "^9.2",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.3.*",
         "symfony/console": "5.3.*",
@@ -42,8 +44,7 @@
         "symfony/yaml": "5.3.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "xervice/data-provider": "^2.5",
-        "league/csv": "^9.0"
+        "xervice/data-provider": "^2.5"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

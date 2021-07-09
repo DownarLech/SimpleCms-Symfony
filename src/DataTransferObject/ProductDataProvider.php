@@ -146,7 +146,7 @@ final class ProductDataProvider extends \Xervice\DataProvider\Business\Model\Dat
     /**
      * @return \App\DataTransferObject\CategoryDataProvider
      */
-    public function getCategory_id(): ?\App\DataTransferObject\CategoryDataProvider
+    public function getCategory_id(): ?CategoryDataProvider
     {
         return $this->category_id;
     }

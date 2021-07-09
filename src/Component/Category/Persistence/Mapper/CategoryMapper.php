@@ -8,13 +8,6 @@ use App\Entity\Category;
 
 class CategoryMapper implements CategoryMapperInterface
 {
-    public function mapArrayToDataProvider(array $categoryList, CategoryDataProvider $categoryDataProvider): CategoryDataProvider
-    {
-        $categoryDataProvider->setId((int)$categoryList['id']);
-        $categoryDataProvider->setName($categoryList['name']);
-
-        return $categoryDataProvider;
-    }
 
     public function mapEntityToDataProvider(Category $category, CategoryDataProvider $categoryDataProvider): CategoryDataProvider
     {

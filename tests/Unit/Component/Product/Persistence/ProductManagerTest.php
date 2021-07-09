@@ -9,9 +9,8 @@ use App\Component\Product\Business\ProductBusinessFacadeInterface;
 use App\DataFixtures\ProductFixture;
 use App\DataTransferObject\CategoryDataProvider;
 use App\DataTransferObject\CsvProductDataProvider;
-use App\DataTransferObject\ProductDataProvider;
-use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ProductManagerTest extends KernelTestCase
@@ -20,7 +19,6 @@ class ProductManagerTest extends KernelTestCase
     private CategoryBusinessFacadeInterface $categoryBusinessFacade;
     private ProductFixture $productFixture;
     private ?EntityManagerInterface $entityManager;
-    private ProductRepository $productRepository;
 
     protected function setUp(): void
     {
@@ -41,21 +39,16 @@ class ProductManagerTest extends KernelTestCase
         $productFixture = static::getContainer()->get(ProductFixture::class);
         $this->productFixture = $productFixture;
 
-        $productRepository = static::getContainer()->get(ProductRepository::class);
-        $this->productRepository = $productRepository;
-
         $this->productFixture->load($this->entityManager);
 
     }
 
     protected function tearDown(): void
     {
-
         $this->entityManager->close();
         $this->entityManager = null;
 
         parent::tearDown();
-
     }
 
     public function testDelete(): void
@@ -77,6 +70,7 @@ class ProductManagerTest extends KernelTestCase
         $csvProductDataProvider = new CsvProductDataProvider();
         $csvProductDataProvider->setName('Apple');
         $csvProductDataProvider->setDescription('lorem Apple Iphone');
+        $csvProductDataProvider->setProductCsvNumber('255');
         $csvProductDataProvider->setCategoryName('smartphone');
 
         $actualData = $this->productBusinessFacade->save($csvProductDataProvider);
@@ -87,6 +81,7 @@ class ProductManagerTest extends KernelTestCase
         self::assertSame(5, $dataFromDb->getId());
         self::assertSame('Apple', $dataFromDb->getName());
         self::assertSame('lorem Apple Iphone', $dataFromDb->getDescription());
+        self::assertSame('255', $dataFromDb->getProductCsvNumber());
         self::assertSame('smartphone', $dataFromDb->getCategoryName());
     }
 
@@ -96,6 +91,7 @@ class ProductManagerTest extends KernelTestCase
         $csvProductDataProvider->setId(1);
         $csvProductDataProvider->setName('Apple');
         $csvProductDataProvider->setDescription('lorem Apple Iphone');
+        $csvProductDataProvider->setProductCsvNumber('255');
         $csvProductDataProvider->setCategoryName('tablet');
         //$productDataProvider->setCategory_id($this->productBusinessFacade->addCategoryByName('camera'));
 
@@ -105,8 +101,21 @@ class ProductManagerTest extends KernelTestCase
         self::assertSame(1, $dataFromDb->getId());
         self::assertSame('Apple', $dataFromDb->getName());
         self::assertSame('lorem Apple Iphone', $dataFromDb->getDescription());
+        self::assertSame('255', $dataFromDb->getProductCsvNumber());
         self::assertSame('tablet', $dataFromDb->getCategoryName());
     }
+
+    public function testSaveWithoutCategory(): void
+    {
+        $csvProductDataProvider = new CsvProductDataProvider();
+        $csvProductDataProvider->setName('Apple');
+        $csvProductDataProvider->setDescription('lorem Apple Iphone');
+        $csvProductDataProvider->setProductCsvNumber('255');
+
+        $this->expectException(RuntimeException::class);
+        $this->productBusinessFacade->save($csvProductDataProvider);
+    }
+
 
     public function testDeleteOnlyCategoryFromProduct(): void
     {
@@ -116,8 +125,6 @@ class ProductManagerTest extends KernelTestCase
         $this->categoryBusinessFacade->delete($categoryFromDb);
         self::assertNull($this->categoryBusinessFacade->getCategoryById(3));
 
-        // w BD tabela Category nie mam laptop i w tabel Product dl id 3 category=null
-        // ale pobiera z category=laptop. jest jeszcze pamiec podreczna?
         $productFromDb = $this->productBusinessFacade->getProductById(3);
 
         self::assertSame('Dell', $productFromDb->getName());
