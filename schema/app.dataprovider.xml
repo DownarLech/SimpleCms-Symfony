@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<DataProviders
+        xmlns="xervice:dataprovider-01"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="xervice:dataprovider-01 ../vendor/xervice/data-provider/dataprovider.schema.xsd"
+>
+    <DataProvider name="Test">
+        <DataElement name="ident" type="int"/>
+        <DataElement name="name" type="string"/>
+    </DataProvider>
+
+    <DataProvider name="User">
+        <DataElement name="id" type="int" allownull="false" default="0" />
+        <DataElement name="username" type="string" default="''"  />
+        <DataElement name="password" type="string" default="''" />
+        <DataElement name="userrole" type="string" />
+    </DataProvider>
+
+    <DataProvider name="Product">
+        <DataElement name="id" type="int" default="0" />
+        <DataElement name="productName" type="string" default="''" />
+        <DataElement name="description" type="string" default="''" />
+        <DataElement name="category_id" type="Category" singleton="Category" allownull="true" />
+    </DataProvider>
+
+    <DataProvider name="Category">
+        <DataElement name="id" type="int" default="0" />
+        <DataElement name="name" type="string" default="''" />
+    </DataProvider>
+
+    <DataProvider name="CsvProduct">
+        <DataElement name="id" type="int" default="0" />
+        <DataElement name="name" type="string" default="''" />
+        <DataElement name="description" type="string" default="''" />
+        <DataElement name="productCsvNumber" type="string" default="''" allownull="true" />
+        <DataElement name="categoryName" type="string" default="''" allownull="true" />
+    </DataProvider>
+
+</DataProviders>
