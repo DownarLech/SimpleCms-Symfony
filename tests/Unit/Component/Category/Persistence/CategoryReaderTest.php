@@ -92,4 +92,6 @@ class CategoryReaderTest extends KernelTestCase
 
         self::assertNull($dataFromDb);
     }
+
+
 }

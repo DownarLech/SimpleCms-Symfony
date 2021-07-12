@@ -72,19 +72,6 @@ class ProductFixture extends Fixture
         return $productDtoList;
     }
 
-    /**
-     * @param array $csvDtoList
-     * @return CsvProductDataProvider[]
-     */
-    public function saveInDbReturnDto(array $csvDtoList): array
-    {
-        $productsDtoList = [];
-
-        foreach ($csvDtoList as $product) {
-            $productsDtoList[] = $this->productManager->save($product);
-        }
-        return $productsDtoList;
-    }
 
     public function getData(): array
     {

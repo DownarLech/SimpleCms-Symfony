@@ -1,27 +1,27 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Component\Product\Business\Csv;
+namespace App\Component\Import\Category\Business;
 
 
-use App\Component\Product\Business\Csv\Mapper\CsvMapper;
+use App\Component\Import\Category\Business\Mapper\CsvCategoryMapper;
 use App\DataTransferObject\CategoryDataProvider;
 use App\Service\Csv\CsvImporter;
 
 class CsvCategoryImporter
 {
     private CsvImporter $csvImporter;
-    private CsvMapper $csvMapper;
+    private CsvCategoryMapper $csvCategoryMapper;
 
     /**
-     * CsvProductImporter constructor.
+     * CsvCategoryImporter constructor.
      * @param CsvImporter $csvImporter
-     * @param CsvMapper $csvMapper
+     * @param CsvCategoryMapper $csvCategoryMapper
      */
-    public function __construct(CsvImporter $csvImporter, CsvMapper $csvMapper)
+    public function __construct(CsvImporter $csvImporter, CsvCategoryMapper $csvCategoryMapper)
     {
         $this->csvImporter = $csvImporter;
-        $this->csvMapper = $csvMapper;
+        $this->csvCategoryMapper = $csvCategoryMapper;
     }
 
     /**
@@ -35,10 +35,9 @@ class CsvCategoryImporter
         $products = $this->csvImporter->loadCsvData($path);
 
         foreach ($products as $product) {
-            $csvDtoList[] = $this->csvMapper->mapIteratorToCategoryDataProvider($product, new CategoryDataProvider());
+            $csvDtoList[] =
+                $this->csvCategoryMapper->mapIteratorToCategoryDataProvider($product, new CategoryDataProvider());
         }
         return $csvDtoList;
     }
-
-
 }

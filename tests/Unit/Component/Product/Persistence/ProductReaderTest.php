@@ -92,4 +92,12 @@ class ProductReaderTest extends KernelTestCase
         self::assertSame('077', $dataFromDb->getProductCsvNumber());
         self::assertSame('tablet', $dataFromDb->getCategoryName());
     }
+
+    public function testGetProductByCsvNumberNotFound(): void
+    {
+        $dataFromDb = $this->productBusinessFacade->getProductByCsvNumber('0000');
+
+        self::assertNull($dataFromDb);
+    }
+
 }

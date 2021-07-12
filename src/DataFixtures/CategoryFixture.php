@@ -64,19 +64,6 @@ class CategoryFixture extends Fixture
         return $categoryDtoList;
     }
 
-    /**
-     * @param array $csvDtoList
-     * @return CategoryDataProvider[]
-     */
-    public function saveInDbReturnDto(array $csvDtoList): array
-    {
-        $arraySavedCategories = [];
-
-        foreach ($csvDtoList as $product) {
-            $arraySavedCategories[] = $this->categoryManager->save($product);
-        }
-        return $arraySavedCategories;
-    }
 
     public function getData(): array
     {

@@ -6,9 +6,7 @@ namespace App\Component\Product\Business;
 
 use App\Component\Product\Persistence\ProductManagerInterface;
 use App\Component\Product\Persistence\ProductReaderInterface;
-use App\DataTransferObject\CategoryDataProvider;
 use App\DataTransferObject\CsvProductDataProvider;
-use App\DataTransferObject\ProductDataProvider;
 
 class ProductBusinessFacade implements ProductBusinessFacadeInterface
 {

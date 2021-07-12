@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Tests\Unit\Component\Product\Business\Csv;
+namespace App\Tests\Unit\Component\Import\Product\Model;
 
-use App\Component\Product\Business\Csv\CsvCategoryImporter;
-use App\Component\Product\Business\Csv\CsvProductImporter;
+use App\Component\Import\Category\Business\Model\MakeImportCategory;
+use App\Component\Import\Product\Business\Model\MakeImportProduct;
 use App\Component\Product\Business\ProductBusinessFacade;
 use App\Component\Product\Business\ProductBusinessFacadeInterface;
 use App\DataFixtures\CategoryFixture;
@@ -11,10 +11,10 @@ use App\DataFixtures\ProductFixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class CsvProductImporterTest extends KernelTestCase
+class MakeImportProductTest extends KernelTestCase
 {
-    private CsvProductImporter $csvProductImporter;
-    private CsvCategoryImporter $csvCategoryImporter;
+    private MakeImportProduct $makeImportProduct;
+    private MakeImportCategory $makeImportCategory;
     private ProductBusinessFacadeInterface $productBusinessFacade;
     private CategoryFixture $categoryFixture;
     private ProductFixture $productFixture;
@@ -30,11 +30,11 @@ class CsvProductImporterTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
 
-        $csvProductImporter = static::getContainer()->get(CsvProductImporter::class);
-        $this->csvProductImporter = $csvProductImporter;
+        $makeImportProduct = static::getContainer()->get(MakeImportProduct::class);
+        $this->makeImportProduct = $makeImportProduct;
 
-        $csvCategoryImporter = static::getContainer()->get(CsvCategoryImporter::class);
-        $this->csvCategoryImporter = $csvCategoryImporter;
+        $makeImportCategory = static::getContainer()->get(MakeImportCategory::class);
+        $this->makeImportCategory = $makeImportCategory;
 
         $productBusinessFacade = static::getContainer()->get(ProductBusinessFacade::class);
         $this->productBusinessFacade = $productBusinessFacade;
@@ -61,15 +61,13 @@ class CsvProductImporterTest extends KernelTestCase
     /**
      * @throws \League\Csv\Exception
      */
-    public function testSaveAsCsvDto(): void
+    public function testSaveProductsFromCsvFile(): void
     {
         $path = __DIR__ . '/../../../../CsvFile/dataInsert.csv';
 
-        $categoryDtoListFromCsv = $this->csvCategoryImporter->loadDataAsCsvDto($path);
-        $this->categoryFixture->saveInDbReturnDto($categoryDtoListFromCsv);
+        $categoryDtoListFromCsv = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
 
-        $productDtoListFromCsv = $this->csvProductImporter->loadDataAsCsvDto($path);
-        $arraySavedProducts = $this->productFixture->saveInDbReturnDto($productDtoListFromCsv);
+        $arraySavedProducts = $this->makeImportProduct->saveProductsFromCsvFile($path);
 
         $productListFromDb = $this->productBusinessFacade->getProductList();
 
@@ -87,23 +85,19 @@ class CsvProductImporterTest extends KernelTestCase
     /**
      * @throws \League\Csv\Exception
      */
-    public function testUpdateSaveAsCsvDto(): void
+    public function testUpdateSaveProductsFromCsvFile(): void
     {
         $path = __DIR__ . '/../../../../CsvFile/dataInsert.csv';
 
-        $categoryDtoListFromCsv = $this->csvCategoryImporter->loadDataAsCsvDto($path);
-        $this->categoryFixture->saveInDbReturnDto($categoryDtoListFromCsv);
+        $categoryDtoListFromCsv = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
 
-        $productDtoListFromCsv = $this->csvProductImporter->loadDataAsCsvDto($path);
-        $this->productFixture->saveInDbReturnDto($productDtoListFromCsv);
+        $arraySavedProducts = $this->makeImportProduct->saveProductsFromCsvFile($path);
 
         $path = __DIR__ . '/../../../../CsvFile/dataUpdate.csv';
 
-        $categoryDtoListFromCsv = $this->csvCategoryImporter->loadDataAsCsvDto($path);
-        $this->categoryFixture->saveInDbReturnDto($categoryDtoListFromCsv);
+        $categoryDtoListFromCsv = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
 
-        $productDtoListFromCsv = $this->csvProductImporter->loadDataAsCsvDto($path);
-        $arraySavedProducts = $this->productFixture->saveInDbReturnDto($productDtoListFromCsv);
+        $arraySavedProducts = $this->makeImportProduct->saveProductsFromCsvFile($path);
 
         $productListFromDb = $this->productBusinessFacade->getProductList();
 
@@ -116,8 +110,5 @@ class CsvProductImporterTest extends KernelTestCase
             self::assertSame($csvDto->getDescription(), $productFromDb->getDescription());
             self::assertSame($csvDto->getCategoryName(), $productFromDb->getCategoryName());
         }
-
     }
-
-
 }

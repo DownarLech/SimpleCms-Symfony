@@ -1,15 +1,13 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Component\Product\Business\Csv\Mapper;
+namespace App\Component\Import\Product\Business\Mapper;
 
-use App\DataTransferObject\CategoryDataProvider;
+
 use App\DataTransferObject\CsvProductDataProvider;
 
-
-class CsvMapper
+class CsvProductMapper
 {
-
     public function mapIteratorToCsvProductDataProvider(array $records, CsvProductDataProvider $csvProductDto): CsvProductDataProvider
     {
         //$csvProductDto->setId((int)$records['abstract_sku']);
@@ -21,10 +19,4 @@ class CsvMapper
         return $csvProductDto;
     }
 
-    public function mapIteratorToCategoryDataProvider(array $records, CategoryDataProvider $categoryDataProvider): CategoryDataProvider
-    {
-        $categoryDataProvider->setName($records['category_key']);
-
-        return $categoryDataProvider;
-    }
 }
