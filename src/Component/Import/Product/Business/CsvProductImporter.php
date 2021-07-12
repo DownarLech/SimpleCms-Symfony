@@ -2,21 +2,21 @@
 
 namespace App\Component\Import\Product\Business;
 
-use App\Component\Import\Product\Business\Mapper\CsvProductMapper;
+use App\Component\Import\Product\Business\Mapper\CsvProductMapperInterface;
 use App\DataTransferObject\CsvProductDataProvider;
 use App\Service\Csv\CsvImporter;
 
-class CsvProductImporter
+class CsvProductImporter implements CsvProductImporterInterface
 {
     private CsvImporter $csvImporter;
-    private CsvProductMapper $csvProductMapper;
+    private CsvProductMapperInterface $csvProductMapper;
 
     /**
      * CsvProductImporter constructor.
      * @param CsvImporter $csvImporter
-     * @param CsvProductMapper $csvProductMapper
+     * @param CsvProductMapperInterface $csvProductMapper
      */
-    public function __construct(CsvImporter $csvImporter, CsvProductMapper $csvProductMapper)
+    public function __construct(CsvImporter $csvImporter, CsvProductMapperInterface $csvProductMapper)
     {
         $this->csvImporter = $csvImporter;
         $this->csvProductMapper = $csvProductMapper;

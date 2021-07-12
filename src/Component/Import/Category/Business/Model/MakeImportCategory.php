@@ -9,7 +9,7 @@ use App\Component\Import\Category\Business\CsvCategoryImporter;
 use App\DataTransferObject\CategoryDataProvider;
 use League\Csv\Exception;
 
-class MakeImportCategory
+class MakeImportCategory implements MakeImportCategoryInterface
 {
     private CategoryBusinessFacadeInterface $categoryBusinessFacade;
     private CsvCategoryImporter $csvCategoryImporter;

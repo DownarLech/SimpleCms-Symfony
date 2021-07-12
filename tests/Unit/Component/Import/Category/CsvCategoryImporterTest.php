@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Component\Import\Category;
 
 use App\Component\Import\Category\Business\CsvCategoryImporter;
+use App\Component\Import\Category\CsvCategoryImporterInterface;
 use App\DataFixtures\CategoryFixture;
 use App\DataFixtures\ProductFixture;
 use App\DataTransferObject\CategoryDataProvider;
@@ -12,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CsvCategoryImporterTest extends KernelTestCase
 {
-    private CsvCategoryImporter $csvCategoryImporter;
+    private CsvCategoryImporterInterface $csvCategoryImporter;
     private CategoryFixture $categoryFixture;
     private ProductFixture $productFixture;
     private ?EntityManagerInterface $entityManager;

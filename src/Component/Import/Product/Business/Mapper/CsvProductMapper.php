@@ -6,7 +6,7 @@ namespace App\Component\Import\Product\Business\Mapper;
 
 use App\DataTransferObject\CsvProductDataProvider;
 
-class CsvProductMapper
+class CsvProductMapper implements CsvProductMapperInterface
 {
     public function mapIteratorToCsvProductDataProvider(array $records, CsvProductDataProvider $csvProductDto): CsvProductDataProvider
     {

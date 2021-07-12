@@ -3,7 +3,6 @@
 namespace App\Component\Product\Persistence\Mapper;
 
 use App\DataTransferObject\CsvProductDataProvider;
-use App\DataTransferObject\ProductDataProvider;
 use App\Entity\Product;
 
 interface ProductMapperInterface
@@ -12,8 +11,5 @@ interface ProductMapperInterface
 
     public function mapCsvProductDtoToEntity(CsvProductDataProvider $csvProductDto, Product $product): Product;
 
-    public function mapEntityToDataProvider(Product $product, ProductDataProvider $productDataProvider): ProductDataProvider;
-
-    public function mapDataProviderToEntity(ProductDataProvider $productDataProvider, Product $product): Product;
 
 }

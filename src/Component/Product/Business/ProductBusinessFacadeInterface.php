@@ -4,9 +4,7 @@
 namespace App\Component\Product\Business;
 
 
-use App\DataTransferObject\CategoryDataProvider;
 use App\DataTransferObject\CsvProductDataProvider;
-use App\DataTransferObject\ProductDataProvider;
 
 interface ProductBusinessFacadeInterface
 {

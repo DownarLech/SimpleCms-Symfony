@@ -3,7 +3,9 @@
 namespace App\Tests\Unit\Component\Import\Product\Model;
 
 use App\Component\Import\Category\Business\Model\MakeImportCategory;
+use App\Component\Import\Category\Business\Model\MakeImportCategoryInterface;
 use App\Component\Import\Product\Business\Model\MakeImportProduct;
+use App\Component\Import\Product\Business\Model\MakeImportProductInterface;
 use App\Component\Product\Business\ProductBusinessFacade;
 use App\Component\Product\Business\ProductBusinessFacadeInterface;
 use App\DataFixtures\CategoryFixture;
@@ -13,8 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class MakeImportProductTest extends KernelTestCase
 {
-    private MakeImportProduct $makeImportProduct;
-    private MakeImportCategory $makeImportCategory;
+    private MakeImportProductInterface $makeImportProduct;
+    private MakeImportCategoryInterface $makeImportCategory;
     private ProductBusinessFacadeInterface $productBusinessFacade;
     private CategoryFixture $categoryFixture;
     private ProductFixture $productFixture;

@@ -6,7 +6,7 @@ namespace App\Component\Import\Category\Business\Mapper;
 
 use App\DataTransferObject\CategoryDataProvider;
 
-class CsvCategoryMapper
+class CsvCategoryMapper implements CsvCategoryMapperInterface
 {
     public function mapIteratorToCategoryDataProvider(array $records, CategoryDataProvider $categoryDataProvider): CategoryDataProvider
     {

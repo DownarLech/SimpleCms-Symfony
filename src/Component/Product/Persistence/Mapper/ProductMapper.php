@@ -68,34 +68,4 @@ class ProductMapper implements ProductMapperInterface
         return $product;
     }
 
-
-    // Methods for ProductDataProvider class
-
-    public function mapEntityToDataProvider(Product $product, ProductDataProvider $productDataProvider): ProductDataProvider
-    {
-        $productDataProvider->setId($product->getId());
-        $productDataProvider->setProductName($product->getName());
-        $productDataProvider->setDescription($product->getDescription());
-
-        $category = $product->getCategory();
-        if (isset($category)) {
-            $category = $this->categoryMapper->mapEntityToDataProvider($product->getCategory(), new CategoryDataProvider());
-        }
-        $productDataProvider->setCategory_id($category);
-
-        return $productDataProvider;
-    }
-
-    public function mapDataProviderToEntity(ProductDataProvider $productDataProvider, Product $product): Product
-    {
-        $product->setName($productDataProvider->getProductName());
-        $product->setDescription($productDataProvider->getDescription());
-
-        $category = $this->categoryBusinessFacade->save($productDataProvider->getCategory_id());
-        $category = $this->categoryRepository->findOneById($category->getId());
-        $product->setCategory($category);
-
-        return $product;
-    }
-
 }

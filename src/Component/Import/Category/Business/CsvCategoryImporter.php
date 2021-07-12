@@ -5,10 +5,11 @@ namespace App\Component\Import\Category\Business;
 
 
 use App\Component\Import\Category\Business\Mapper\CsvCategoryMapper;
+use App\Component\Import\Category\CsvCategoryImporterInterface;
 use App\DataTransferObject\CategoryDataProvider;
 use App\Service\Csv\CsvImporter;
 
-class CsvCategoryImporter
+class CsvCategoryImporter implements CsvCategoryImporterInterface
 {
     private CsvImporter $csvImporter;
     private CsvCategoryMapper $csvCategoryMapper;

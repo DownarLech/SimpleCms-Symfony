@@ -3,7 +3,6 @@
 
 namespace App\Component\Product\Business;
 
-
 use App\Component\Product\Persistence\ProductManagerInterface;
 use App\Component\Product\Persistence\ProductReaderInterface;
 use App\DataTransferObject\CsvProductDataProvider;
@@ -20,7 +19,7 @@ class ProductBusinessFacade implements ProductBusinessFacadeInterface
      */
     public function __construct(
         ProductManagerInterface $productManager,
-        ProductReaderInterface $productReader
+        ProductReaderInterface $productReader,
     )
     {
         $this->productManager = $productManager;

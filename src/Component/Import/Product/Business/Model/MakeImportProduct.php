@@ -6,7 +6,7 @@ use App\Component\Import\Product\Business\CsvProductImporter;
 use App\Component\Product\Business\ProductBusinessFacadeInterface;
 use App\DataTransferObject\CsvProductDataProvider;
 
-class MakeImportProduct
+class MakeImportProduct implements MakeImportProductInterface
 {
     private ProductBusinessFacadeInterface $productBusinessFacade;
     private CsvProductImporter $csvProductImporter;
