@@ -2,10 +2,11 @@
 
 namespace App\Tests\Unit\Component\Import\Product\Model;
 
-use App\Component\Import\Category\Business\Model\MakeImportCategory;
-use App\Component\Import\Category\Business\Model\MakeImportCategoryInterface;
-use App\Component\Import\Product\Business\Model\MakeImportProduct;
-use App\Component\Import\Product\Business\Model\MakeImportProductInterface;
+use App\Component\Import\Business\Category\Model\MakeImportCategory;
+use App\Component\Import\Business\Category\Model\MakeImportCategoryInterface;
+use App\Component\Import\Business\ImportBusinessFacade;
+use App\Component\Import\Business\Product\Model\MakeImportProduct;
+use App\Component\Import\Business\Product\Model\MakeImportProductInterface;
 use App\Component\Product\Business\ProductBusinessFacade;
 use App\Component\Product\Business\ProductBusinessFacadeInterface;
 use App\DataFixtures\CategoryFixture;
@@ -17,6 +18,8 @@ class MakeImportProductTest extends KernelTestCase
 {
     private MakeImportProductInterface $makeImportProduct;
     private MakeImportCategoryInterface $makeImportCategory;
+
+    private ImportBusinessFacade $importBusinessFacade;
     private ProductBusinessFacadeInterface $productBusinessFacade;
     private CategoryFixture $categoryFixture;
     private ProductFixture $productFixture;
@@ -37,6 +40,9 @@ class MakeImportProductTest extends KernelTestCase
 
         $makeImportCategory = static::getContainer()->get(MakeImportCategory::class);
         $this->makeImportCategory = $makeImportCategory;
+
+        $importBusinessFacade = static::getContainer()->get(ImportBusinessFacade::class);
+        $this->importBusinessFacade = $importBusinessFacade;
 
         $productBusinessFacade = static::getContainer()->get(ProductBusinessFacade::class);
         $this->productBusinessFacade = $productBusinessFacade;
@@ -67,9 +73,9 @@ class MakeImportProductTest extends KernelTestCase
     {
         $path = __DIR__ . '/../../../../CsvFile/dataInsert.csv';
 
-        $categoryDtoListFromCsv = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
+        $categoryDtoListFromCsv = $this->importBusinessFacade->saveCategoriesFromCsvFile($path);
 
-        $arraySavedProducts = $this->makeImportProduct->saveProductsFromCsvFile($path);
+        $arraySavedProducts = $this->importBusinessFacade->saveProductsFromCsvFile($path);
 
         $productListFromDb = $this->productBusinessFacade->getProductList();
 
@@ -80,6 +86,7 @@ class MakeImportProductTest extends KernelTestCase
             self::assertSame($csvDto->getId(), $productFromDb->getId());
             self::assertSame($csvDto->getName(), $productFromDb->getName());
             self::assertSame($csvDto->getDescription(), $productFromDb->getDescription());
+            self::assertSame($csvDto->getArticleNumber(), $productFromDb->getArticleNumber());
             self::assertSame($csvDto->getCategoryName(), $productFromDb->getCategoryName());
         }
     }
@@ -91,15 +98,15 @@ class MakeImportProductTest extends KernelTestCase
     {
         $path = __DIR__ . '/../../../../CsvFile/dataInsert.csv';
 
-        $categoryDtoListFromCsv = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
+        $categoryDtoListFromCsv = $this->importBusinessFacade->saveCategoriesFromCsvFile($path);
 
-        $arraySavedProducts = $this->makeImportProduct->saveProductsFromCsvFile($path);
+        $arraySavedProducts = $this->importBusinessFacade->saveProductsFromCsvFile($path);
 
         $path = __DIR__ . '/../../../../CsvFile/dataUpdate.csv';
 
-        $categoryDtoListFromCsv = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
+        $categoryDtoListFromCsv = $this->importBusinessFacade->saveCategoriesFromCsvFile($path);
 
-        $arraySavedProducts = $this->makeImportProduct->saveProductsFromCsvFile($path);
+        $arraySavedProducts = $this->importBusinessFacade->saveProductsFromCsvFile($path);
 
         $productListFromDb = $this->productBusinessFacade->getProductList();
 
@@ -110,6 +117,7 @@ class MakeImportProductTest extends KernelTestCase
             self::assertSame($csvDto->getId(), $productFromDb->getId());
             self::assertSame($csvDto->getName(), $productFromDb->getName());
             self::assertSame($csvDto->getDescription(), $productFromDb->getDescription());
+            self::assertSame($csvDto->getArticleNumber(), $productFromDb->getArticleNumber());
             self::assertSame($csvDto->getCategoryName(), $productFromDb->getCategoryName());
         }
     }

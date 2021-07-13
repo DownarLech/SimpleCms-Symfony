@@ -17,7 +17,7 @@ final class CsvProductDataProvider extends \Xervice\DataProvider\Business\Model\
     protected $description = '';
 
     /** @var string */
-    protected $productCsvNumber = '';
+    protected $articleNumber = '';
 
     /** @var string */
     protected $categoryName = '';
@@ -149,19 +149,19 @@ final class CsvProductDataProvider extends \Xervice\DataProvider\Business\Model\
     /**
      * @return string
      */
-    public function getProductCsvNumber(): ?string
+    public function getArticleNumber(): ?string
     {
-        return $this->productCsvNumber;
+        return $this->articleNumber;
     }
 
 
     /**
-     * @param string $productCsvNumber
+     * @param string $articleNumber
      * @return CsvProductDataProvider
      */
-    public function setProductCsvNumber(?string $productCsvNumber = '')
+    public function setArticleNumber(?string $articleNumber = '')
     {
-        $this->productCsvNumber = $productCsvNumber;
+        $this->articleNumber = $articleNumber;
 
         return $this;
     }
@@ -170,9 +170,9 @@ final class CsvProductDataProvider extends \Xervice\DataProvider\Business\Model\
     /**
      * @return CsvProductDataProvider
      */
-    public function unsetProductCsvNumber()
+    public function unsetArticleNumber()
     {
-        $this->productCsvNumber = null;
+        $this->articleNumber = null;
 
         return $this;
     }
@@ -181,9 +181,9 @@ final class CsvProductDataProvider extends \Xervice\DataProvider\Business\Model\
     /**
      * @return bool
      */
-    public function hasProductCsvNumber()
+    public function hasArticleNumber()
     {
-        return ($this->productCsvNumber !== null && $this->productCsvNumber !== []);
+        return ($this->articleNumber !== null && $this->articleNumber !== []);
     }
 
 
@@ -264,9 +264,9 @@ final class CsvProductDataProvider extends \Xervice\DataProvider\Business\Model\
             'is_dataprovider' => false,
             'isCamelCase' => false,
           ),
-          'productCsvNumber' =>
+          'articleNumber' =>
           array (
-            'name' => 'productCsvNumber',
+            'name' => 'articleNumber',
             'allownull' => true,
             'default' => '\'\'',
             'type' => 'string',

@@ -29,7 +29,7 @@
         <DataElement name="id" type="int" default="0" />
         <DataElement name="name" type="string" default="''" />
         <DataElement name="description" type="string" default="''" />
-        <DataElement name="productCsvNumber" type="string" default="''" allownull="true" />
+        <DataElement name="articleNumber" type="string" default="''" allownull="true" />
         <DataElement name="categoryName" type="string" default="''" allownull="true" />
     </DataProvider>
 

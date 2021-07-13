@@ -2,11 +2,7 @@
 
 namespace App\Component\Product\Persistence\Mapper;
 
-use App\Component\Category\Business\CategoryBusinessFacadeInterface;
-use App\Component\Category\Persistence\Mapper\CategoryMapperInterface;
-use App\DataTransferObject\CategoryDataProvider;
 use App\DataTransferObject\CsvProductDataProvider;
-use App\DataTransferObject\ProductDataProvider;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Repository\CategoryRepository;
@@ -14,25 +10,15 @@ use RuntimeException;
 
 class ProductMapper implements ProductMapperInterface
 {
-    private CategoryMapperInterface $categoryMapper;
-    private CategoryBusinessFacadeInterface $categoryBusinessFacade;
     private CategoryRepository $categoryRepository;
 
 
     /**
      * ProductMapper constructor.
-     * @param CategoryMapperInterface $categoryMapper
-     * @param CategoryBusinessFacadeInterface $categoryBusinessFacade
      * @param CategoryRepository $categoryRepository
      */
-    public function __construct(
-        CategoryMapperInterface $categoryMapper,
-        CategoryBusinessFacadeInterface $categoryBusinessFacade,
-        CategoryRepository $categoryRepository
-    )
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->categoryMapper = $categoryMapper;
-        $this->categoryBusinessFacade = $categoryBusinessFacade;
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -41,7 +27,7 @@ class ProductMapper implements ProductMapperInterface
         $csvProductDto->setId($product->getId());
         $csvProductDto->setName($product->getName());
         $csvProductDto->setDescription($product->getDescription());
-        $csvProductDto->setProductCsvNumber($product->getProductCsvNumber());
+        $csvProductDto->setArticleNumber($product->getArticleNumber());
         //What with null here?? When Category is null, in csvProductDP categoryName is "" empty string
         $category = $product->getCategory();
         if ($category instanceof Category) {
@@ -55,7 +41,7 @@ class ProductMapper implements ProductMapperInterface
     {
         $product->setName($csvProductDto->getName());
         $product->setDescription($csvProductDto->getDescription());
-        $product->setProductCsvNumber($csvProductDto->getProductCsvNumber());
+        $product->setArticleNumber($csvProductDto->getArticleNumber());
 
         $categoryName = $csvProductDto->getCategoryName();
         $category = $this->categoryRepository->findOneByName($categoryName);

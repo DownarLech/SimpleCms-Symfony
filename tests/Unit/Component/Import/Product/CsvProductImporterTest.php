@@ -2,8 +2,9 @@
 
 namespace App\Tests\Unit\Component\Import\Product;
 
-use App\Component\Import\Product\Business\CsvProductImporter;
-use App\Component\Import\Product\Business\CsvProductImporterInterface;
+
+use App\Component\Import\Business\Product\CsvProductImporter;
+use App\Component\Import\Business\Product\CsvProductImporterInterface;
 use App\DataFixtures\CategoryFixture;
 use App\DataFixtures\ProductFixture;
 use App\DataTransferObject\CsvProductDataProvider;

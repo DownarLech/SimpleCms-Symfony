@@ -50,9 +50,9 @@ class ProductBusinessFacade implements ProductBusinessFacadeInterface
         return $this->productReader->getProductById($id);
     }
 
-    public function getProductByCsvNumber(string $productCsvNumber): ?CsvProductDataProvider
+    public function getProductByArticleNumber(string $articleNumber): ?CsvProductDataProvider
     {
-        return $this->productReader->getProductByCsvNumber($productCsvNumber);
+        return $this->productReader->getProductByArticleNumber($articleNumber);
     }
 
 }

@@ -32,10 +32,11 @@ class Product
      */
     private $Category;
 
+
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      */
-    private $productCsvNumber;
+    private $articleNumber;
 
     public function getId(): ?int
     {
@@ -78,14 +79,15 @@ class Product
         return $this;
     }
 
-    public function getProductCsvNumber(): ?string
+
+    public function getArticleNumber(): ?string
     {
-        return $this->productCsvNumber;
+        return $this->articleNumber;
     }
 
-    public function setProductCsvNumber(?string $productCsvNumber): self
+    public function setArticleNumber(?string $articleNumber): self
     {
-        $this->productCsvNumber = $productCsvNumber;
+        $this->articleNumber = $articleNumber;
 
         return $this;
     }

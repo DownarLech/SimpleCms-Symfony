@@ -4,8 +4,8 @@ namespace App\Tests\Unit\Component\Import\Category\Model;
 
 use App\Component\Category\Business\CategoryBusinessFacade;
 use App\Component\Category\Business\CategoryBusinessFacadeInterface;
-use App\Component\Import\Category\Business\Model\MakeImportCategory;
-use App\Component\Import\Category\Business\Model\MakeImportCategoryInterface;
+use App\Component\Import\Business\ImportBusinessFacade;
+use App\Component\Import\Business\ImportBusinessFacadeInterface;
 use App\DataFixtures\CategoryFixture;
 use App\DataFixtures\ProductFixture;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class MakeImportCategoryTest extends KernelTestCase
 {
-    private MakeImportCategoryInterface $makeImportCategory;
+    private ImportBusinessFacadeInterface $importBusinessFacade;
     private CategoryBusinessFacadeInterface $categoryBusinessFacade;
     private CategoryFixture $categoryFixture;
     private ProductFixture $productFixture;
@@ -29,8 +29,8 @@ class MakeImportCategoryTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
 
-        $makeImportCategory = static::getContainer()->get(MakeImportCategory::class);
-        $this->makeImportCategory = $makeImportCategory;
+        $importBusinessFacade = static::getContainer()->get(ImportBusinessFacade::class);
+        $this->importBusinessFacade = $importBusinessFacade;
 
         $categoryBusinessFacade = static::getContainer()->get(CategoryBusinessFacade::class);
         $this->categoryBusinessFacade = $categoryBusinessFacade;
@@ -60,7 +60,7 @@ class MakeImportCategoryTest extends KernelTestCase
     {
         $path = __DIR__ . '/../../../../CsvFile/dataInsert.csv';
 
-        $arraySavedCategories = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
+        $arraySavedCategories = $this->importBusinessFacade->saveCategoriesFromCsvFile($path);
 
         $categoriesFromDB = $this->categoryBusinessFacade->getCategoryList();
 
@@ -79,10 +79,10 @@ class MakeImportCategoryTest extends KernelTestCase
     public function testUpdateSaveCategoriesFromCsvFile(): void
     {
         $path = __DIR__ . '/../../../../CsvFile/dataInsert.csv';
-        $arraySavedCategories = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
+        $arraySavedCategories = $this->importBusinessFacade->saveCategoriesFromCsvFile($path);
 
         $path = __DIR__ . '/../../../../CsvFile/dataUpdate.csv';
-        $arrayUpdatedCategories  = $this->makeImportCategory->saveCategoriesFromCsvFile($path);
+        $arrayUpdatedCategories  = $this->importBusinessFacade->saveCategoriesFromCsvFile($path);
 
         $categoriesFromDB = $this->categoryBusinessFacade->getCategoryList();
 

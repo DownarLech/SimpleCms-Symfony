@@ -24,9 +24,9 @@ class ProductRepository extends ServiceEntityRepository
         return $this->findOneBy(['id' => $id]);
     }
 
-    public function findOneByCsvNumber(string $productCsvNumber): ?Product
+    public function findOneByArticleNumber(string $articleNumber): ?Product
     {
-        return $this->findOneBy(['productCsvNumber' => $productCsvNumber]);
+        return $this->findOneBy(['articleNumber' => $articleNumber]);
     }
 
     // /**

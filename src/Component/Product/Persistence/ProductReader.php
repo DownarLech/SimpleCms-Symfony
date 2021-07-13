@@ -51,9 +51,9 @@ class ProductReader implements ProductReaderInterface
         return $this->productMapper->mapEntityToCsvProductDto($dataFromDb, new CsvProductDataProvider());
     }
 
-    public function getProductByCsvNumber(string $productCsvNumber): ?CsvProductDataProvider
+    public function getProductByArticleNumber(string $articleNumber): ?CsvProductDataProvider
     {
-        $dataFromDb = $this->productRepository->findOneByCsvNumber($productCsvNumber);
+        $dataFromDb = $this->productRepository->findOneByArticleNumber($articleNumber);
         if(!$dataFromDb) {
             return null;
         }

@@ -17,5 +17,5 @@ interface ProductBusinessFacadeInterface
 
     public function getProductById(int $id): ?CsvProductDataProvider;
 
-    public function getProductByCsvNumber(string $productCsvNumber): ?CsvProductDataProvider;
+    public function getProductByArticleNumber(string $articleNumber): ?CsvProductDataProvider;
 }

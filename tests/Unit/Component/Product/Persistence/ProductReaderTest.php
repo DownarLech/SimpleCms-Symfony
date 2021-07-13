@@ -51,7 +51,7 @@ class ProductReaderTest extends KernelTestCase
         self::assertSame(1, $dataFromDb[1]->getId());
         self::assertSame('Samsung', $dataFromDb[2]->getName());
         self::assertSame('lorem Dell X4', $dataFromDb[3]->getDescription());
-        self::assertSame('004', $dataFromDb[1]->getProductCsvNumber());
+        self::assertSame('004', $dataFromDb[1]->getArticleNumber());
         self::assertSame('laptop', $dataFromDb[3]->getCategoryName());
 
 
@@ -59,7 +59,7 @@ class ProductReaderTest extends KernelTestCase
             $data = $dataGiven[$dataDb->getId()-1];
             self::assertSame($dataDb->getName(), $data['name']);
             self::assertSame($dataDb->getDescription(), $data['description']);
-            self::assertSame($dataDb->getProductCsvNumber(), $data['productCsvNumber']);
+            self::assertSame($dataDb->getArticleNumber(), $data['articleNumber']);
             self::assertSame($dataDb->getCategoryName(), $data['category']);
         }
     }
@@ -71,7 +71,7 @@ class ProductReaderTest extends KernelTestCase
         self::assertSame(2, $dataFromDb->getId());
         self::assertSame('Samsung', $dataFromDb->getName());
         self::assertSame('lorem Samsung A1', $dataFromDb->getDescription());
-        self::assertSame('008', $dataFromDb->getProductCsvNumber());
+        self::assertSame('008', $dataFromDb->getArticleNumber());
         self::assertSame('smartphone', $dataFromDb->getCategoryName());
     }
 
@@ -84,18 +84,18 @@ class ProductReaderTest extends KernelTestCase
 
     public function testGetProductByCsvNumber(): void
     {
-        $dataFromDb = $this->productBusinessFacade->getProductByCsvNumber('077');
+        $dataFromDb = $this->productBusinessFacade->getProductByArticleNumber('077');
 
         self::assertSame(4, $dataFromDb->getId());
         self::assertSame('Lenovo', $dataFromDb->getName());
         self::assertSame('lorem Lenovo', $dataFromDb->getDescription());
-        self::assertSame('077', $dataFromDb->getProductCsvNumber());
+        self::assertSame('077', $dataFromDb->getArticleNumber());
         self::assertSame('tablet', $dataFromDb->getCategoryName());
     }
 
     public function testGetProductByCsvNumberNotFound(): void
     {
-        $dataFromDb = $this->productBusinessFacade->getProductByCsvNumber('0000');
+        $dataFromDb = $this->productBusinessFacade->getProductByArticleNumber('0000');
 
         self::assertNull($dataFromDb);
     }

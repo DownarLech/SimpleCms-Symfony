@@ -64,7 +64,7 @@ class ProductFixture extends Fixture
             $productDto = new CsvProductDataProvider();
             $productDto->setName($product['name']);
             $productDto->setDescription($product['description']);
-            $productDto->setProductCsvNumber($product['productCsvNumber']);
+            $productDto->setArticleNumber($product['articleNumber']);
             $productDto->setCategoryName($product['category']);
 
             $productDtoList[] = $this->productManager->save($productDto);
@@ -79,25 +79,25 @@ class ProductFixture extends Fixture
             [
                 'name' => 'Asus',
                 'description' => 'lorem Asus 102',
-                'productCsvNumber' => '004',
+                'articleNumber' => '004',
                 'category' => 'tablet'
             ],
             [
                 'name' => 'Samsung',
                 'description' => 'lorem Samsung A1',
-                'productCsvNumber' => '008',
+                'articleNumber' => '008',
                 'category' => 'smartphone'
             ],
             [
                 'name' => 'Dell',
                 'description' => 'lorem Dell X4',
-                'productCsvNumber' => '034',
+                'articleNumber' => '034',
                 'category' => 'laptop'
             ],
             [
                 'name' => 'Lenovo',
                 'description' => 'lorem Lenovo',
-                'productCsvNumber' => '077',
+                'articleNumber' => '077',
                 'category' => 'tablet'
             ]
         ];
@@ -109,31 +109,31 @@ class ProductFixture extends Fixture
             [
                 'name' => 'Apple',
                 'description' => 'lorem Apple Mac',
-                'productCsvNumber' => '004',
+                'articleNumber' => '004',
                 'category' => 'tablet'
             ],
             [
                 'name' => 'Samsung',
                 'description' => 'lorem Samsung A1',
-                'productCsvNumber' => '008',
+                'articleNumber' => '008',
                 'category' => 'tablet'
             ],
             [
                 'name' => 'Dell',
                 'description' => 'lorem Dell X4',
-                'productCsvNumber' => '034',
+                'articleNumber' => '034',
                 'category' => 'laptop'
             ],
             [
                 'name' => 'Lenovo',
                 'description' => 'lorem Lenovo',
-                'productCsvNumber' => '077',
+                'articleNumber' => '077',
                 'category' => 'smartphone'
             ],
             [
                 'name' => 'Nokia',
                 'description' => 'lorem Nokia',
-                'productCsvNumber' => '105',
+                'articleNumber' => '105',
                 'category' => 'camera'
             ]
         ];

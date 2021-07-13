@@ -3,7 +3,6 @@
 namespace App\Component\Product\Persistence;
 
 use App\DataTransferObject\CsvProductDataProvider;
-use App\DataTransferObject\ProductDataProvider;
 
 interface ProductReaderInterface
 {
@@ -11,6 +10,6 @@ interface ProductReaderInterface
 
     public function getProductById(int $id): ?CsvProductDataProvider;
 
-    public function getProductByCsvNumber(string $productCsvNumber): ?CsvProductDataProvider;
+    public function getProductByArticleNumber(string $articleNumber): ?CsvProductDataProvider;
 
 }

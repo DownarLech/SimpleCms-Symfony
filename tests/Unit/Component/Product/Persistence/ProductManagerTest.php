@@ -70,7 +70,7 @@ class ProductManagerTest extends KernelTestCase
         $csvProductDataProvider = new CsvProductDataProvider();
         $csvProductDataProvider->setName('Apple');
         $csvProductDataProvider->setDescription('lorem Apple Iphone');
-        $csvProductDataProvider->setProductCsvNumber('255');
+        $csvProductDataProvider->setArticleNumber('255');
         $csvProductDataProvider->setCategoryName('smartphone');
 
         $actualData = $this->productBusinessFacade->save($csvProductDataProvider);
@@ -81,7 +81,7 @@ class ProductManagerTest extends KernelTestCase
         self::assertSame(5, $dataFromDb->getId());
         self::assertSame('Apple', $dataFromDb->getName());
         self::assertSame('lorem Apple Iphone', $dataFromDb->getDescription());
-        self::assertSame('255', $dataFromDb->getProductCsvNumber());
+        self::assertSame('255', $dataFromDb->getArticleNumber());
         self::assertSame('smartphone', $dataFromDb->getCategoryName());
     }
 
@@ -91,7 +91,7 @@ class ProductManagerTest extends KernelTestCase
         $csvProductDataProvider->setId(1);
         $csvProductDataProvider->setName('Apple');
         $csvProductDataProvider->setDescription('lorem Apple Iphone');
-        $csvProductDataProvider->setProductCsvNumber('255');
+        $csvProductDataProvider->setArticleNumber('255');
         $csvProductDataProvider->setCategoryName('tablet');
         //$productDataProvider->setCategory_id($this->productBusinessFacade->addCategoryByName('camera'));
 
@@ -101,7 +101,7 @@ class ProductManagerTest extends KernelTestCase
         self::assertSame(1, $dataFromDb->getId());
         self::assertSame('Apple', $dataFromDb->getName());
         self::assertSame('lorem Apple Iphone', $dataFromDb->getDescription());
-        self::assertSame('255', $dataFromDb->getProductCsvNumber());
+        self::assertSame('255', $dataFromDb->getArticleNumber());
         self::assertSame('tablet', $dataFromDb->getCategoryName());
     }
 
@@ -110,7 +110,7 @@ class ProductManagerTest extends KernelTestCase
         $csvProductDataProvider = new CsvProductDataProvider();
         $csvProductDataProvider->setName('Apple');
         $csvProductDataProvider->setDescription('lorem Apple Iphone');
-        $csvProductDataProvider->setProductCsvNumber('255');
+        $csvProductDataProvider->setArticleNumber('255');
 
         $this->expectException(RuntimeException::class);
         $this->productBusinessFacade->save($csvProductDataProvider);

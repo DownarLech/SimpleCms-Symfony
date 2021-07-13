@@ -40,9 +40,9 @@ class ProductManager implements ProductManagerInterface
 
     public function save(CsvProductDataProvider $csvProductDataProvider): CsvProductDataProvider
     {
-        if($csvProductDataProvider->hasProductCsvNumber()) {
-            $productCsvNumber = $csvProductDataProvider->getProductCsvNumber();
-            $product = $this->productRepository->findOneByCsvNumber($productCsvNumber);
+        if($csvProductDataProvider->hasArticleNumber()) {
+            $articleNumber = $csvProductDataProvider->getArticleNumber();
+            $product = $this->productRepository->findOneByArticleNumber($articleNumber);
         }
         if($csvProductDataProvider->hasId()) {
             $id = $csvProductDataProvider->getId();
