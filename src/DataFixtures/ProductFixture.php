@@ -20,7 +20,7 @@ class ProductFixture extends Fixture
      */
     public function __construct(
         ProductManagerInterface $productManager,
-        CategoryFixture $categoryFixture,
+        CategoryFixture $categoryFixture
     )
     {
         $this->productManager = $productManager;

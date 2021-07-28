@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products list{% endblock %}
+
+{% block body %}
+    <div class="row h-100 justify-content-center align-items-center row-my-nr1">
+
+        <h1>Products</h1>
+
+        <ul>
+            {% for product in productsList %}
+                <li><a href="{{ url('product_detail', {'productId' : product.id}) }}" class="product_detail_url">{{ product.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <br>
+        <div>
+            <a href="{{ path('product_new') }}"><button>Add New</button></a>
+        </div>
+    </div>
+
+{% endblock %}

@@ -25,6 +25,7 @@ class MakeImportProduct implements MakeImportProductInterface
         $this->csvProductImporter = $csvProductImporter;
     }
 
+
     /**
      * @param string $path
      * @return CsvProductDataProvider[]

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories details{% endblock %}
+
+{% block body %}
+
+    <h1>Category ID: {{ category.id }}</h1>
+    <h2>Category Name: {{ category.name }}</h2>
+    <br>
+
+    <a href="{{ path('category_delete' , {'categoryId' : category.id}) }}"><button>Delete</button></a>
+    <a href="{{ path('category_update' , {'categoryId' : category.id}) }}"><button>Update</button></a>
+
+
+{% endblock %}

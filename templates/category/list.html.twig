@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories list{% endblock %}
+
+{% block body %}
+    <div class="row h-100 justify-content-center align-items-center row-my-nr1">
+
+        <h1>Categories</h1>
+
+        <ul>
+            {% for category in categoryList %}
+                <li><a href="{{ url('category_detail', {'categoryId' : category.id}) }}" class="category_detail_url">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <br>
+        <div>
+            <a href="{{ path('category_new' ) }}"><button>Add New</button></a>
+        </div>
+    </div>
+
+{% endblock %}

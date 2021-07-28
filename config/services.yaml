@@ -27,19 +27,31 @@ services:
 
   # controllers are imported separately to make sure services can be injected
   # as action arguments even if you don't extend any base controller class
-  App\Controller\:
-    resource: '../src/Controller/'
-    tags: ['controller.service_arguments']
+
+  App\Component\ProductFrontEnd\Communication\:
+    resource: '../src/Component/ProductFrontEnd/Communication/'
+    tags: [ 'controller.service_arguments' ]
+
+  App\Component\User\Communication\:
+    resource: '../src/Component/User/Communication/'
+    tags: [ 'controller.service_arguments' ]
+
+  App\Component\Category\Communication\:
+    resource: '../src/Component/Category/Communication/'
+    tags: [ 'controller.service_arguments' ]
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
   ###> Xervice\DataProvider ###
   Xervice\DataProvider\Communication\Console\CleanCommand:
-    tags: [console.command]
+    tags: [ console.command ]
   Xervice\DataProvider\Communication\Console\GenerateCommand:
-    tags: [console.command]
+    tags: [ console.command ]
   ###< Xervice\DataProvider ###
 
-  App\MessageHandler\MyMessageHandler:
-    tags: [messenger.message_handler]
+  App\Component\ProductFrontEnd\Business\Upload\FileUploader:
+    arguments:
+      $targetDirectory: '%kernel.project_dir%/import'
+
+

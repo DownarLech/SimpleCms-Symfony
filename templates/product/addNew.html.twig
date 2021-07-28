@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product details{% endblock %}
+
+{% block body %}
+
+    <ul>
+        <h1>Pleas add new product</h1>
+
+        {{ form_start(form) }}
+
+        <li>
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </li>
+        <li>
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </li>
+        <li>
+            {{ form_label(form.articleNumber) }}
+            {{ form_widget(form.articleNumber) }}
+        </li>
+        <li>
+            {{ form_label(form.categoryName) }}
+            {{ form_widget(form.categoryName) }}
+        </li>
+        <br>
+        {{ form_widget(form.save) }}
+
+
+        {{ form_end(form) }}
+    </ul>
+
+
+{% endblock %}

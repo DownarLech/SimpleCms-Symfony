@@ -19,7 +19,7 @@ class ProductBusinessFacade implements ProductBusinessFacadeInterface
      */
     public function __construct(
         ProductManagerInterface $productManager,
-        ProductReaderInterface $productReader,
+        ProductReaderInterface $productReader
     )
     {
         $this->productManager = $productManager;

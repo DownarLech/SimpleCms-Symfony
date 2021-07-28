@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product details{% endblock %}
+
+{% block body %}
+
+    <h1>Product ID: {{ product.id }}</h1>
+    <h2>Product Name: {{ product.name }}</h2>
+    <h3>Product Description: {{ product.description }}</h3>
+    <h3>Article Number: {{ product.articleNumber }}</h3>
+    <h3>Product Category: {{ product.categoryName }}</h3>
+
+    <a href="{{ path('product_delete' , {'productId' : product.id}) }}"><button>Delete</button></a>
+    <a href="{{ path('product_update' , {'productId' : product.id}) }}"><button>Update</button></a>
+
+{% endblock %}

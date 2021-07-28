@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User details{% endblock %}
+
+{% block body %}
+
+    <h1>User ID: {{ user.id }}</h1>
+    <h2>User Name: {{ user.username }}</h2>
+    <h3>User Password :) : {{ user.password }}</h3>
+    <h3>User Role: {{ user.userrole }}</h3>
+
+    <ul>
+        <h1>Pleas update user  {{ user.id  }}</h1>
+
+        {{ form_start(form) }}
+
+        <li>
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+        </li>
+        <li>
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+        </li>
+        <li>
+            {{ form_label(form.userrole) }}
+            {{ form_widget(form.userrole) }}
+        </li>
+        <br>
+        {{ form_widget(form.update) }}
+
+        {{ form_end(form) }}
+    </ul>
+
+
+{% endblock %}

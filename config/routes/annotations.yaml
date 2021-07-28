@@ -1,7 +1,11 @@
-controllers:
-    resource: ../../src/Controller/
+product_controllers:
+    resource: ../../src/Component/ProductFrontEnd/Communication/
     type: annotation
 
-kernel:
-    resource: ../../src/Kernel.php
+user_controllers:
+    resource: ../../src/Component/User/Communication/
+    type: annotation
+
+category_controllers:
+    resource: ../../src/Component/Category/Communication/
     type: annotation

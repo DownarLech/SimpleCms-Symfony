@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories details{% endblock %}
+
+{% block body %}
+
+
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form.name) }}
+    {{ form_widget(form.save) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

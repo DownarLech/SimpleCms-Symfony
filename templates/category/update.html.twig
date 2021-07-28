@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories details{% endblock %}
+
+{% block body %}
+
+    <h1>Category ID: {{ category.id }}</h1>
+    <h2>Category Name: {{ category.name }}</h2>
+
+    {{ form_start(form) }}
+
+    {{ form_label(form.username) }}
+    {{ form_widget(form.username) }}
+
+    {{ form_widget(form.update) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

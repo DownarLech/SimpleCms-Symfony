@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users list{% endblock %}
+
+{% block body %}
+    <div class="row h-100 justify-content-center align-items-center row-my-nr1">
+
+        <h1>Users</h1>
+
+        <ul>
+            {% for user in userList %}
+                <li><a href="{{ url('user_detail', {'userId' : user.id}) }}">{{ user.username }}</a></li>
+            {% endfor %}
+        </ul>
+        <br>
+        <div>
+            <a href="{{ path('user_new') }}"><button>Add New</button></a>
+        </div>
+    </div>
+
+{% endblock %}

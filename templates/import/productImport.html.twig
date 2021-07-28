@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Products list{% endblock %}
+
+{% block body %}
+
+
+    <h1>Import</h1>
+
+    <p>Click on the "Choose File" button to upload a file:</p>
+    <div>
+        {{ form_start(form) }}
+
+
+        <div>
+            {{ form_widget(form.upload_file) }}
+        </div>
+        <br>
+        <div>
+            {{ form_widget(form.send) }}
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}
+
