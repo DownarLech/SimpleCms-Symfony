@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ProductType extends AbstractType
+class ProductImportType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

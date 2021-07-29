@@ -5,7 +5,7 @@ namespace App\Component\ProductFrontEnd\Communication\Controller;
 
 use App\Component\Import\Business\ImportBusinessFacade;
 use App\Component\ProductFrontEnd\Business\Upload\FileUploader;
-use App\Component\ProductFrontEnd\Communication\Form\ProductType;
+use App\Component\ProductFrontEnd\Communication\Form\ProductImportType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class ProductImportController extends AbstractController
     //#[Route('/import', name: 'import')]
     public function index(Request $request, FileUploader $fileUploader): Response
     {
-        $form = $this->createForm(ProductType::class); //second parameter
+        $form = $this->createForm(ProductImportType::class); //second parameter
 
         $form->handleRequest($request);
 
@@ -44,7 +44,6 @@ class ProductImportController extends AbstractController
             $data = $form->get('upload_file')->getData();
 
              if ($data instanceof File ) {
-            //if ($data) {
                 $fileToSave = $fileUploader->upLoad($data);
                 $fileToSave = $fileUploader->getTargetDirectory().'/'.$fileToSave;
 

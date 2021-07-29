@@ -8,6 +8,7 @@ use App\Component\Category\Communication\Controller\CategoryController;
 use App\DataFixtures\CategoryFixture;
 use App\DataTransferObject\CategoryDataProvider;
 use Doctrine\Persistence\ObjectManager;
+use ErrorException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
@@ -107,6 +108,16 @@ class CategoryControllerTest extends WebTestCase
         self::assertNull($this->categoryBusinessFacade->getCategoryById(1));
     }
 
+    public function testDeleteCategoryNotFound(): void
+    {
+        $this->client->request(
+            'GET',
+            '/category/delete/9999'
+        );
+        self::assertResponseStatusCodeSame(404);
+    }
+
+
     public function testUpdate(): void
     {
         $csrfToken = static::getContainer()->get(CsrfTokenManagerInterface::class)->getToken('category_update')->getValue();
@@ -127,6 +138,26 @@ class CategoryControllerTest extends WebTestCase
         self::assertSame('fridge', $category->getName());
     }
 
+    public function testUpdateCategoryPage(): void
+    {
+        $this->client->request(
+            'GET',
+            '/category/update/1'
+        );
+        self::assertResponseStatusCodeSame(200);
+        self::assertSelectorTextContains('h1', '1');
+        self::assertSelectorTextContains('h2', 'tablet');
+    }
+
+    public function testUpdateCategoryNotFound(): void
+    {
+        $this->client->request(
+            'POST',
+            '/category/update/999999999'
+        );
+        self::assertResponseStatusCodeSame(404);
+    }
+
     public function testNew(): void
     {
         $csrfToken = static::getContainer()->get(CsrfTokenManagerInterface::class)->getToken('category_add_new')->getValue();
@@ -142,9 +173,17 @@ class CategoryControllerTest extends WebTestCase
                 ],
             ]
         );
-
         self::assertInstanceOf(CategoryDataProvider::class,
             $this->categoryBusinessFacade->getCategoryByName('fridge'));
+    }
+
+    public function testNewCategoryPage(): void
+    {
+        $this->client->request(
+            'GET',
+            '/category/new'
+        );
+        self::assertResponseStatusCodeSame(200);
     }
 
 }

@@ -120,7 +120,16 @@ class ProductControllerTest extends WebTestCase
         self::assertNull($this->productBusinessFacade->getProductById(1));
     }
 
-    public function testUpdateX(): void
+    public function testDeleteProductNotFound(): void
+    {
+        $this->client->request(
+            'GET',
+            '/product/delete/999999999'
+        );
+        self::assertResponseStatusCodeSame(404);
+    }
+
+    public function testUpdate(): void
     {
         $csrfToken = static::getContainer()->get(CsrfTokenManagerInterface::class)->getToken('product_update')->getValue();
 
@@ -133,7 +142,7 @@ class ProductControllerTest extends WebTestCase
                     'name' => 'newName',
                     'description' => 'abc',
                     'articleNumber' => '777',
-                    'categoryName' => 'laptop',
+                    'categoryName' => '3', //her I need category Id. "categories" => array:1 [0 => "1", 1 => "2"]
                     'update' => true,
                 ],
             ]
@@ -145,7 +154,27 @@ class ProductControllerTest extends WebTestCase
         self::assertSame('laptop', $product->getCategoryName());
     }
 
-    public function testNewX(): void
+    public function testProductProductPage(): void
+    {
+        $this->client->request(
+            'GET',
+            '/product/update/1'
+        );
+        self::assertResponseStatusCodeSame(200);
+        self::assertSelectorTextContains('h1', '1');
+        self::assertSelectorTextContains('h2', 'Asus');
+    }
+
+    public function testUpdateProductNotFound(): void
+    {
+        $this->client->request(
+            'GET',
+            '/product/update/999999999'
+        );
+        self::assertResponseStatusCodeSame(404);
+    }
+
+    public function testNew(): void
     {
         $csrfToken = static::getContainer()->get(CsrfTokenManagerInterface::class)->getToken('product_add_new')->getValue();
 
@@ -172,6 +201,18 @@ class ProductControllerTest extends WebTestCase
         self::assertSame('tablet', $product->getCategoryName());
     }
 
+    public function testNewProductPage(): void
+    {
+        $this->client->request(
+            'GET',
+            '/product/new'
+        );
+        self::assertResponseStatusCodeSame(200);
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
     public function testNew2X(): void
     {
         $csrfToken = static::getContainer()->get(CsrfTokenManagerInterface::class)->getToken('product_add_new')->getValue();

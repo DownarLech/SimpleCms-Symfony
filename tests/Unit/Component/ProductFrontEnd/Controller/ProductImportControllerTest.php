@@ -59,7 +59,7 @@ class ProductImportControllerTest extends WebTestCase
 
     public function testImportMake(): void
     {
-        $csrfToken = static::getContainer()->get(CsrfTokenManagerInterface::class)->getToken('product')->getValue();
+        $csrfToken = static::getContainer()->get(CsrfTokenManagerInterface::class)->getToken('product_import')->getValue();
         //$uploadedFile = __DIR__ . '/../../../CsvFile/dataInsert.csv';
         $uploadedFile = new UploadedFile(__DIR__ . '/../import/dataInsert.csv', 'dataInsert.csv');
 
@@ -67,17 +67,17 @@ class ProductImportControllerTest extends WebTestCase
             'POST',
             '/product/import/make',
             [
-                'product' => [
+                'product_import' => [
                     '_token' => $csrfToken,
                 ],
             ],
             [
-                'product' => [
+                'product_import' => [
                     'upload_file' => $uploadedFile,
                 ],
             ],
             [
-                'product' => [
+                'product_import' => [
                     'send' => true,
                 ],
             ]
